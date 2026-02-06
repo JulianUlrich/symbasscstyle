@@ -53,6 +53,12 @@
       </substitute>
     </names>
   </macro>
+  <macro name="short-biblio">
+    <group delimiter=" ">
+      <text macro="author-short"/>
+      <text macro="year-date"/>
+    </group>
+  </macro>
   <macro name="author-short">
     <names variable="author">
       <name form="short"/>
@@ -201,10 +207,7 @@
   <!-- Bibliography -->
   <bibliography entry-spacing="0">
     <layout suffix=".">
-      <group delimiter=" " suffix=" ">
-        <text macro="author-short"/>
-        <text macro="year-date"/>
-      </group>
+      <text macro="short-biblio" suffix=". "/>
       <group delimiter=" " suffix=", ">
         <text macro="author"/>
         <text macro="year-date" prefix="(" suffix=")"/>
