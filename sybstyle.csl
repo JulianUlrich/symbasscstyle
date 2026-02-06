@@ -201,6 +201,10 @@
   <!-- Bibliography -->
   <bibliography entry-spacing="0">
     <layout suffix=".">
+      <group delimiter=" " suffix=" ">
+        <text macro="author-short"/>
+        <text macro="year-date"/>
+      </group>
       <group delimiter=" " suffix=", ">
         <text macro="author"/>
         <text macro="year-date" prefix="(" suffix=")"/>
