@@ -18,6 +18,7 @@
   <macro name="author-short">
     <names variable="author">
       <name form="short" and="text"/>
+      <et-al term=""/>
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
@@ -70,7 +71,7 @@
       <date-part name="year"/>
     </date>
   </macro>
-  <citation et-al-min="200" et-al-use-first="200" disambiguate-add-year-suffix="true">
+  <citation et-al-min="2" et-al-use-first="1" disambiguate-add-year-suffix="true">
     <sort>
       <key variable="issued"/>
       <key macro="author"/>
