@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
-    <title>sybstylev2</title>
+    <title>sybstyle</title>
     <id>http://www.zotero.org/styles/sybstyle</id>
     <author>
       <name>Juul</name>
@@ -13,17 +13,16 @@
     <updated>2018-03-31T04:01:14+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
-
   <locale xml:lang="en">
     <terms>
       <term name="chapter" form="short">ch.</term>
       <term name="presented at">presented at the</term>
       <term name="available at">available</term>
-      <term name="et-al"></term>
+      <term name="et-al">
+      </term>
     </terms>
   </locale>
-
-  <!-- Macros (UNCHANGED) -->
+  <!-- Macros -->
   <macro name="edition">
     <choose>
       <if type="bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="any">
@@ -41,11 +40,9 @@
       </if>
     </choose>
   </macro>
-
   <macro name="year-date">
     <date variable="issued" date-parts="year" form="numeric"/>
   </macro>
-
   <macro name="author">
     <names variable="author">
       <name initialize-with=" " name-as-sort-order="all" sort-separator=" "/>
@@ -56,7 +53,6 @@
       </substitute>
     </names>
   </macro>
-
   <macro name="author-short">
     <names variable="author">
       <name form="short"/>
@@ -66,32 +62,29 @@
       </substitute>
     </names>
   </macro>
-
   <macro name="editor">
     <names variable="editor">
       <name initialize-with=". " delimiter=", " and="text"/>
       <label form="short" prefix=", " text-case="capitalize-first"/>
     </names>
   </macro>
-
   <macro name="locators">
     <group delimiter=", ">
       <text macro="edition"/>
       <group delimiter=" ">
         <text term="volume" form="short"/>
-        <number variable="volume"/>
+        <number variable="volume" form="numeric"/>
       </group>
       <group delimiter=" ">
-        <number variable="number-of-volumes"/>
+        <number variable="number-of-volumes" form="numeric"/>
         <text term="volume" form="short" plural="true"/>
       </group>
       <group delimiter=" ">
         <text term="issue" form="short"/>
-        <number variable="issue"/>
+        <number variable="issue" form="numeric"/>
       </group>
     </group>
   </macro>
-
   <macro name="title">
     <choose>
       <if type="bill book graphic legal_case legislation motion_picture song" match="any">
@@ -102,7 +95,6 @@
       </else>
     </choose>
   </macro>
-
   <macro name="publisher">
     <choose>
       <if type="bill book chapter graphic legal_case legislation motion_picture paper-conference song" match="any">
@@ -119,11 +111,11 @@
       </else>
     </choose>
   </macro>
-
   <macro name="event">
     <choose>
       <if type="paper-conference speech" match="any">
         <choose>
+          <!-- Published Conference Paper -->
           <if variable="container-title">
             <group delimiter=", ">
               <group delimiter=" ">
@@ -133,6 +125,7 @@
               <text variable="event-place"/>
             </group>
           </if>
+          <!-- Unpublished Conference Paper -->
           <else>
             <group delimiter=", ">
               <group delimiter=" ">
@@ -146,38 +139,37 @@
       </if>
     </choose>
   </macro>
-
   <macro name="access">
     <choose>
       <if type="webpage">
-        <if variable="URL">
-          <group delimiter=". ">
-            <text term="online" prefix="[" suffix="]" text-case="capitalize-first"/>
-            <group delimiter=": ">
-              <text term="available at" text-case="capitalize-first"/>
-              <text variable="URL"/>
+        <choose>
+          <if variable="URL">
+            <group delimiter=". ">
+              <text term="online" prefix="[" suffix="]" text-case="capitalize-first"/>
+              <group delimiter=": ">
+                <text term="available at" text-case="capitalize-first"/>
+                <text variable="URL"/>
+              </group>
+              <group prefix="[" suffix="]" delimiter=": ">
+                <text term="accessed" text-case="capitalize-first"/>
+                <date variable="accessed">
+                  <date-part name="day" form="numeric-leading-zeros" suffix="-"/>
+                  <date-part name="month" form="short" suffix="-" strip-periods="true"/>
+                  <date-part name="year" form="long"/>
+                </date>
+              </group>
             </group>
-            <group prefix="[" suffix="]" delimiter=": ">
-              <text term="accessed" text-case="capitalize-first"/>
-              <date variable="accessed">
-                <date-part name="day" form="numeric-leading-zeros" suffix="-"/>
-                <date-part name="month" form="short" suffix="-" strip-periods="true"/>
-                <date-part name="year" form="long"/>
-              </date>
-            </group>
-          </group>
-        </if>
+          </if>
+        </choose>
       </if>
     </choose>
   </macro>
-
   <macro name="page">
     <group>
       <label variable="page" form="short" suffix=" "/>
       <text variable="page"/>
     </group>
   </macro>
-
   <macro name="citation-locator">
     <group delimiter=" ">
       <choose>
@@ -191,8 +183,7 @@
       <text variable="locator"/>
     </group>
   </macro>
-
-  <!-- Citation unchanged -->
+  <!-- Citation -->
   <citation et-al-min="2" et-al-use-first="1" disambiguate-add-year-suffix="true">
     <sort>
       <key variable="citation-number"/>
@@ -207,25 +198,20 @@
       </group>
     </layout>
   </citation>
-
-  <!-- UPDATED Bibliography -->
+  <!-- Bibliography -->
   <bibliography entry-spacing="0">
     <layout suffix=".">
-
-      <!-- NEW short form at beginning -->
       <group delimiter=" " suffix=" ">
         <text macro="author-short"/>
         <text macro="year-date"/>
       </group>
-
-      <!-- original long author + year -->
       <group delimiter=" " suffix=", ">
         <text macro="author"/>
         <text macro="year-date" prefix="(" suffix=")"/>
       </group>
-
-      <!-- rest unchanged -->
+      <!-- Rest of Citation -->
       <choose>
+        <!-- Specific Formats -->
         <if type="article-journal">
           <group delimiter=", ">
             <text macro="title"/>
@@ -272,6 +258,7 @@
             <text variable="number"/>
           </group>
         </else-if>
+        <!-- Generic/Fallback Formats -->
         <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
           <group delimiter=", " suffix=". ">
             <text macro="title"/>
@@ -318,7 +305,6 @@
           </group>
         </else>
       </choose>
-
       <text variable="DOI" prefix=", doi:"/>
     </layout>
   </bibliography>
